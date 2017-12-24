@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Neighborhood Map</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+	<div id="map"></div>
+	<div id="options-box">
+		<h1 class="loc"> Locations</h1>
+		<input type="text" placeholder="Station Location" id="search-location-text" data-bind="value: search_val" size="35">
+        <button type="submit" class="btn btn-info btn-lg" id="search-location" data-bind="click: updateList">
+			<span class="glyphicon glyphicon-filter"></span>Filter</button>
+
+		<ul class="text" data-bind="foreach: locations_list">
+    		<li class="padding-left" data-bind="text: $data.title, click: $parent.showInfo"></li>
+    	</ul>
+	</div>
+	<div class="heading">
+		<span class="glyphicon glyphicon-menu-hamburger" id="hide-options" data-bind="click: toggleOptions"></span>
+	</div>
+
+<script src="js/libs/knockout-3.4.2.js"></script>
+<script src="js/libs/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyCQOoHEELQ0XPMo0Raj31A3HNggpNTK4TU&v=3">
+</script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

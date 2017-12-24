@@ -1,0 +1,134 @@
+html,
+body {
+  font-family: Arial, sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.loc {
+  color: #ffffff;
+  font-size: 40px;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+input {
+  margin-left: 20px;
+}
+
+
+@media screen and (max-width: 1096px) {
+  .loc {
+    font-size: 32px;
+  }
+
+  #search-location-text {
+    width: 250px;
+    height: 40px;
+  }
+
+  #search-location {
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .loc {
+    font-size: 24px;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+  }
+
+  * {
+    font-size: 12px;
+  }
+
+  #search-location-text {
+    width: 140px;
+    height: 30px;
+  }
+
+  #search-location {
+    padding: 5px 8px 5px 8px;
+    margin-top: 10px;
+    font-size: 10px;
+  }
+
+  .text {
+    padding-left: 10px  ;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  * {
+    font-size: 10px;
+  }
+
+  .text {
+    padding-left: 5px;
+  }
+
+  .loc {
+    font-size: 18px;
+    padding-bottom: 5px;
+  }
+
+  #search-location-text {
+    width: 90px;
+    height: 30px;
+  }
+}
+
+.container {
+  height: 100%;
+  position: relative;
+}
+
+.heading {
+  background-color: #696969;
+  padding: 20px;
+  left: 30%;
+  right: 0px;
+  top: 0;
+  height: 7%;
+  position: fixed;
+}
+
+#map {
+  top: 7%;
+  height: 100%;
+  left: 30%;
+  position: absolute;
+  right: 0px;
+}
+
+#options-box {
+  background-color: #000;
+  border: 1px solid #999;
+  border-radius: 3px;
+  line-height: 35px;
+  padding: 10px 10px 30px 10px;
+  margin: 0;
+  text-align: left;
+  width: 30%;
+  min-height: 100%;
+}
+
+.text {
+  padding-top: 10px;
+  color: #fff;
+}
+
+.padding-left {
+  padding-left: 10px;
+}
+
+
+#pano {
+  width: 250px;
+  height: 250px;
+}
+
