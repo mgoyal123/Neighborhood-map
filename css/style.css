@@ -6,11 +6,19 @@ body {
   padding: 0;
 }
 
+li {
+  cursor: pointer;
+}
+
 .loc {
   color: #ffffff;
   font-size: 40px;
   text-align: center;
   padding-bottom: 20px;
+}
+
+#hide-options {
+  cursor: pointer;
 }
 
 input {
@@ -98,8 +106,8 @@ input {
 }
 
 #map {
-  top: 7%;
-  height: 100%;
+  top: 0;
+  min-height: 100%;
   left: 30%;
   position: absolute;
   right: 0px;
@@ -107,8 +115,6 @@ input {
 
 #options-box {
   background-color: #000;
-  border: 1px solid #999;
-  border-radius: 3px;
   line-height: 35px;
   padding: 10px 10px 30px 10px;
   margin: 0;

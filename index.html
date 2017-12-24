@@ -12,7 +12,7 @@
 <body>
 	<div id="map"></div>
 	<div id="options-box">
-		<h1 class="loc"> Locations</h1>
+		<h1 class="loc">NYC Famous Locations</h1>
 		<input type="text" placeholder="Station Location" id="search-location-text" data-bind="value: search_val" size="35">
         <button type="submit" class="btn btn-info btn-lg" id="search-location" data-bind="click: updateList">
 			<span class="glyphicon glyphicon-filter"></span>Filter</button>
@@ -27,9 +27,9 @@
 
 <script src="js/libs/knockout-3.4.2.js"></script>
 <script src="js/libs/jquery.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyCQOoHEELQ0XPMo0Raj31A3HNggpNTK4TU&v=3">
-</script>
 <script src="js/app.js"></script>
+<script async onload="initMap()" onerror="errorOnLoad()" src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyCQOoHEELQ0XPMo0Raj31A3HNggpNTK4TU&v=3">
+</script>
 
 </body>
 </html>
