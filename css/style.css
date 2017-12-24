@@ -93,8 +93,8 @@ input {
   left: 30%;
   right: 0px;
   top: 0;
+  position: absolute;
   height: 7%;
-  position: fixed;
 }
 
 #map {

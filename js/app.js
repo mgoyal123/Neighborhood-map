@@ -48,6 +48,17 @@ var ViewModel = function() {
 
   this.toggleOptions = function(){
 
+    if($('#options-box').is(":hidden")) {
+      $('#options-box').show();
+      $('.heading').css('left','30%');
+      $('#map').css('left', '30%');
+    }
+    else {
+      $('#options-box').hide();
+      $('.heading').css('left','0%');
+      $('#map').css('left', '0').css('width', '100%');
+      google.maps.event.trigger(map, 'resize');
+    }
   }
 
   showMarkers = function() {
