@@ -4,27 +4,16 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow-y: auto;
 }
 
 li {
   cursor: pointer;
 }
 
-.loc {
-  color: #ffffff;
-  font-size: 40px;
-  text-align: center;
-  padding-bottom: 20px;
-}
-
-#hide-options {
-  cursor: pointer;
-}
-
 input {
   margin-left: 20px;
 }
-
 
 @media screen and (max-width: 1096px) {
   .loc {
@@ -48,6 +37,10 @@ input {
     font-size: 24px;
     padding-bottom: 10px;
     margin-bottom: 0;
+  }
+
+  .city {
+    font-size: 18px;
   }
 
   * {
@@ -84,10 +77,25 @@ input {
     padding-bottom: 5px;
   }
 
+  .city {
+    font-size: 13px;
+  }
+
   #search-location-text {
     width: 90px;
     height: 30px;
   }
+}
+
+.loc {
+  color: #ffffff;
+  font-size: 40px;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+#hide-options {
+  cursor: pointer;
 }
 
 .container {
@@ -135,4 +143,12 @@ input {
 #pano {
   width: 200px;
   height: 200px;
+}
+
+.city {
+  color: #fff;
+}
+
+#list {
+  overflow-y: scroll;
 }
