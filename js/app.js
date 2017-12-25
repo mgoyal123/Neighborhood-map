@@ -1,3 +1,6 @@
+var CLIENT_ID = "3SJU4035GEAO5AZRNFZUQWRN2XMTBM5BVZAHBYHOFLHHDPGX";
+var CLIENT_SECRET = "DF5HA2MSN4Z40LO2GJH0HV24Z2VEULR14MGI5HZKANEC1GLF"
+
 var locations_data = [
   {title: 'Statue of Liberty', location: {lat: 40.689249, lng: -74.044500}},
   {title: 'Central Park', location: {lat: 40.782865, lng: -73.965355}},
@@ -38,9 +41,11 @@ initMap = function() {
 
 }
 
+
 errorOnLoad = function() {
   window.alert("There was an error in loading maps. Please try again..!!")
 }
+
 
 var ViewModel = function() {
 
@@ -143,30 +148,64 @@ var ViewModel = function() {
       infowindow.addListener('closeclick', function() {
         infowindow.marker = null;
       });
+
+      var lat = marker.getPosition().lat();
+      var lng = marker.getPosition().lng();
+      var content = "";
       var streetViewService = new google.maps.StreetViewService();
       var radius = 50;
-      function getStreetView(data, status) {
-        if( status == google.maps.StreetViewStatus.OK) {
-          var nearStreetViewLoc = data.location.latLng;
-          var heading = google.maps.geometry.spherical.computeHeading(nearStreetViewLoc, marker.position);
-          infowindow.setContent("<div>" + marker.title + "</div><div id='pano'></div>");
-          var panoramaOptions = {
-            position: nearStreetViewLoc,
-            pov: {
-              heading: heading,
-              pitch: 30
+
+      $.ajax({
+          type: "GET",
+          dataType: "jsonp",
+          timeout: 5000,
+          url: 'https://api.foursquare.com/v2/venues/explore?ll=' + lat + ',' + lng + '&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET + '&v=20171224',
+          success: function(data){
+            var base = data.response.groups[0].items[0];
+            if(base.venue.categories[0].name) {
+              var categories = base.venue.categories[0].name;
+              content = '<div id="category">Category:' + categories + '</div><br>';
             }
-          };
-          var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
-        }
-        else{
-          infowindow.setContent("<div>" + marker.title + "</div><div> No street view found </div>");
-        }
-      }
+            if(base.venue.contact.phone) {
+              var phone = base.venue.contact.phone;
+              content = content + '<div id="phone">Contact no:' + phone + '</div><br>';
+            }
+            if(base.venue.hours) {
+              if(base.venue.hours.status) {
+                var present_status = base.venue.hours.status;
+                content = content + '<div id="status">Status:' + present_status + '</div><br>';
+              }
+            }
+            if(base.venue.url) {
+              var url = base.venue.url;
+              content = content + '<div id="url"><a target="_blank "href="' + url + '">For more information, Click here!</a></div>';
+            }
 
-      streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
-
-      infowindow.open(map, marker);
+            function getStreetView(data, status) {
+              if( status == google.maps.StreetViewStatus.OK) {
+                var nearStreetViewLoc = data.location.latLng;
+                var heading = google.maps.geometry.spherical.computeHeading(nearStreetViewLoc, marker.position);
+                infowindow.setContent('<div>' + marker.title + '</div><div id="pano"></div>' + content);
+                var panoramaOptions = {
+                  position: nearStreetViewLoc,
+                  pov: {
+                    heading: heading,
+                    pitch: 30
+                  }
+                };
+                var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
+              }
+              else{
+                infowindow.setContent("<div>" + marker.title + "</div><div> No street view found </div>" + content);
+              }
+            }
+            streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
+            infowindow.open(map, marker);
+          },
+          error : function(data, staus) {
+            window.alert("Failed to retrive information for current Marker.Please try again later..!!");
+          }
+      });
     }
   }
 
@@ -200,6 +239,7 @@ var ViewModel = function() {
     }
     showMarkers();
   }
+
 };
 
 
