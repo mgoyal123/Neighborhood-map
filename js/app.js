@@ -14,6 +14,7 @@ initMap = function() {
     zoom: 13,
     });
     infowindow = new google.maps.InfoWindow();
+    createMarkers();
 }
 
 // Callback error function if maps api does not load
@@ -64,9 +65,13 @@ var ViewModel = function() {
 
   var self = this;
   this.search_val = ko.observable("");
-  this.entered_loc = ko.observable("");
-  this.locations_list = ko.observableArray(locations_data);
+  this.entered_loc = ko.observable("NYC");
+  this.locations_list = ko.observableArray([]);
   var markers = [];
+      httpGet(self.entered_loc());
+    locations_data.forEach(function(location) {
+        self.locations_list.push(location);
+    });
 
 
   // This method is called when user enters a location and hits search button
@@ -81,6 +86,7 @@ var ViewModel = function() {
     });
     createMarkers();
   }
+
 
   // This updates the ko observable array and markers according to the filter value
   this.updateList = function() {
@@ -271,6 +277,7 @@ var ViewModel = function() {
     }
     showMarkers();
   }
+
 };
 
 
