@@ -68,10 +68,10 @@ var ViewModel = function() {
   this.entered_loc = ko.observable("NYC");
   this.locations_list = ko.observableArray([]);
   var markers = [];
-      httpGet(self.entered_loc());
-    locations_data.forEach(function(location) {
-        self.locations_list.push(location);
-    });
+  httpGet(self.entered_loc());
+  locations_data.forEach(function(location) {
+    self.locations_list.push(location);
+  });
 
 
   // This method is called when user enters a location and hits search button
@@ -102,6 +102,7 @@ var ViewModel = function() {
     });
     showMarkers();
   }
+
 
   // This is invoked when user hits a location from list
   this.showInfo = function(location) {
