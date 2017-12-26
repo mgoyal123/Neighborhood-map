@@ -5,23 +5,22 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<div id="map"></div>
 	<div id="options-box">
-		<h1 class="loc">Trending Places</h1>
-		<h4 class="city">Enter your favourite city</h4>
-		<input type="text" placeholder="Ex. NYC" id="search_location-text" data-bind="value: entered_loc" size="35">
-        <button type="submit" class="btn btn-info btn-lg" id="search-location" data-bind="click: showList">
+		<h1>Trending Places</h1>
+		<h4>Enter your favourite city</h4>
+		<input type="text" placeholder="Ex. NYC" class="search-location-text" data-bind="value: entered_loc" size="35">
+        <button type="submit" class="btn btn-info btn-lg search-location" data-bind="click: showList">
 			<span class="glyphicon glyphicon-search"></span>Search</button>
 
 		<br><hr>
 
-		<input type="text" placeholder="Filter Locations" id="search-location-text" data-bind="value: search_val" size="35">
-        <button type="submit" class="btn btn-info btn-lg" id="search-location" data-bind="click: updateList">
+		<input type="text" placeholder="Filter Locations" class="search-location-text" data-bind="value: search_val" size="35">
+        <button type="submit" class="btn btn-info btn-lg search-location" data-bind="click: updateList">
 			<span class="glyphicon glyphicon-filter"></span>Filter</button>
 		<hr>
 
