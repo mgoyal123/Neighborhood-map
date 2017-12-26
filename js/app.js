@@ -22,44 +22,6 @@ errorOnLoad = function() {
   window.alert("There was an error in loading maps. Please try again..!!")
 }
 
-// Method to get details of places near user entered location using foursquare api
-httpGet = function(entered_loc)
-{
-  theUrl = 'https://api.foursquare.com/v2/venues/explore?near=' + entered_loc + '&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET + '&v=20171224';
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-  xmlHttp.send( null );
-  var data = JSON.parse(xmlHttp.responseText);
-  locations_data = [];
-  if(data["meta"]["code"] == 200){
-    var base = data.response.groups[0].items;
-    var len = base.length;
-
-    for (var i=0; i<len; i++) {
-      var loc_details = {};
-      loc_details.title = base[i].venue.name;
-      loc_details.location = {
-        lat: base[i].venue.location.lat,
-        lng: base[i].venue.location.lng
-      };
-
-      if(base[i].venue.categories.name) {
-        loc_details.category = base[i].venue.categories.name;
-      }
-      if(base[i].venue.contact.phone) {
-        loc_details.contact = base[i].venue.contact.phone;
-      }
-      if(base[i].venue.url) {
-        loc_details.url = base[i].venue.url;
-      }
-      locations_data.push(loc_details);
-    }
-  }
-  else {
-    window.alert("Failed to retrive information for current location.Please try some other location..!!");
-  }
-}
-
 
 var ViewModel = function() {
 
@@ -69,11 +31,54 @@ var ViewModel = function() {
   this.locations_list = ko.observableArray([]);
   this.is_opt_shown = ko.observable(true);
   var markers = [];
-  httpGet(self.entered_loc());
-  locations_data.forEach(function(location) {
-    self.locations_list.push(location);
-  });
 
+
+// Method to get details of places near user entered location using foursquare api
+  getData = function(){
+    $.ajax({
+      type: 'GET',
+      url: 'https://api.foursquare.com/v2/venues/explore?near=' + self.entered_loc() + '&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET + '&v=20171224',
+      dataType: 'json',
+      success: function(data){
+        locations_data = [];
+        if(data["meta"]["code"] == 200){
+          var base = data.response.groups[0].items;
+          var len = base.length;
+
+          for (var i=0; i<len; i++) {
+            var loc_details = {};
+            loc_details.title = base[i].venue.name;
+            loc_details.location = {
+              lat: base[i].venue.location.lat,
+              lng: base[i].venue.location.lng
+            };
+
+            if(base[i].venue.categories.name) {
+              loc_details.category = base[i].venue.categories.name;
+            }
+            if(base[i].venue.contact.phone) {
+              loc_details.contact = base[i].venue.contact.phone;
+            }
+            if(base[i].venue.url) {
+              loc_details.url = base[i].venue.url;
+            }
+            locations_data.push(loc_details);
+          }
+          locations_data.forEach(function(location) {
+              self.locations_list.push(location);
+          });
+          createMarkers();
+        }
+        else {
+          window.alert("Failed to retrive information for current location.Please try some other location..!!");
+        }
+      },
+      error: function(data, status) {
+        window.alert("There was an error in loading locations for this city. Please try again later..!!")
+      }
+    });
+  }
+  getData();
 
   // This method is called when user enters a location and hits search button
   this.showList = function() {
@@ -81,11 +86,7 @@ var ViewModel = function() {
     hideMarkers();
     markers=[];
     self.locations_list([]);
-    httpGet(self.entered_loc());
-    locations_data.forEach(function(location) {
-        self.locations_list.push(location);
-    });
-    createMarkers();
+    getData();
   }
 
 
