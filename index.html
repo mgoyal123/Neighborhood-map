@@ -19,9 +19,7 @@
 
 		<br><hr>
 
-		<input type="text" placeholder="Filter Locations" class="search-location-text" data-bind="value: search_val" size="35">
-        <button type="submit" class="btn btn-info btn-lg search-location" data-bind="click: updateList">
-			<span class="glyphicon glyphicon-filter"></span>Filter</button>
+		<input type="search" placeholder="Filter Locations" class="search-location-text" data-bind="value: search_val, valueUpdate:'keyup'" size="35" autocomplete="off">
 		<hr>
 
 		<ul class="text" data-bind="foreach: locations_list" id="list">

@@ -281,5 +281,8 @@ var ViewModel = function() {
 
 };
 
-
-ko.applyBindings(new ViewModel());
+var viewmodel = new ViewModel();
+viewmodel.search_val.subscribe(viewmodel.updateList);
+// ViewModel().search_val().subscribe(ViewModel().updateList);
+ko.applyBindings(viewmodel);
+// ViewModel().search_val().subscribe(ViewModel().updateList);
