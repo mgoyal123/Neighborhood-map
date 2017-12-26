@@ -9,8 +9,8 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<div id="map"></div>
-	<div id="options-box">
+	<div id="map" class="map" data-bind="css: { resize: !is_opt_shown() }"></div>
+	<div id="options-box" data-bind="css: { hide: !is_opt_shown() }">
 		<h1>Trending Places</h1>
 		<h4>Enter your favourite city</h4>
 		<input type="text" placeholder="Ex. NYC" class="search-location-text" data-bind="value: entered_loc" size="35">
@@ -26,7 +26,7 @@
     		<li class="padding-left" data-bind="text: $data.title, click: $parent.showInfo"></li>
     	</ul>
 	</div>
-	<div class="heading">
+	<div class="heading" data-bind="css: { rearrange: !is_opt_shown() }">
 		<span class="glyphicon glyphicon-menu-hamburger" id="hide-options" data-bind="click: toggleOptions"></span>
 	</div>
 

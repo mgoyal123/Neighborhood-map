@@ -94,13 +94,25 @@ h1 {
 
 @media screen and (max-width: 340px) {
 
+  * {
+    font-size: 8px;
+  }
+
+  h1 {
+    font-size: 16px;
+  }
+
   .search-location-text {
-    width: 70px;
+    width: 68px;
     height: 25px;
   }
 
   .search-location {
     padding: 4px 6px 4px 6px;
+  }
+
+  #options-box {
+    width: 40%;
   }
 }
 
@@ -123,7 +135,7 @@ h1 {
   height: 7%;
 }
 
-#map {
+.map {
   top: 0;
   min-height: 100%;
   left: 30%;
@@ -139,6 +151,19 @@ h1 {
   text-align: left;
   width: 30%;
   min-height: 100%;
+}
+
+.hide {
+  display: none;
+}
+
+.resize {
+  min-width: 100%;
+  left: 0;
+}
+
+.rearrange {
+  left: 0;
 }
 
 .text {

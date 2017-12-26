@@ -67,6 +67,7 @@ var ViewModel = function() {
   this.search_val = ko.observable("");
   this.entered_loc = ko.observable("NYC");
   this.locations_list = ko.observableArray([]);
+  this.is_opt_shown = ko.observable(true);
   var markers = [];
   httpGet(self.entered_loc());
   locations_data.forEach(function(location) {
@@ -114,21 +115,17 @@ var ViewModel = function() {
     }
   }
 
-  // When hamburger icon is clicked, the options bar toggles
+  // // When hamburger icon is clicked, the options bar toggles
   this.toggleOptions = function(){
-
-    if($('#options-box').is(":hidden")) {
-      $('#options-box').show();
-      $('.heading').css('left','30%');
-      $('#map').css('left', '30%');
-    }
-    else {
-      $('#options-box').hide();
-      $('.heading').css('left','0%');
-      $('#map').css('left', '0').css('width', '100%');
+    if(self.is_opt_shown()) {
+      self.is_opt_shown(false);
       google.maps.event.trigger(map, 'resize');
     }
+    else {
+      self.is_opt_shown(true);
+    }
   }
+
 
   // This function will loop through the markers array and display them all.
   showMarkers = function() {
@@ -283,6 +280,4 @@ var ViewModel = function() {
 
 var viewmodel = new ViewModel();
 viewmodel.search_val.subscribe(viewmodel.updateList);
-// ViewModel().search_val().subscribe(ViewModel().updateList);
 ko.applyBindings(viewmodel);
-// ViewModel().search_val().subscribe(ViewModel().updateList);
